@@ -38,3 +38,5 @@ class Ball(sprobj.SprObj):
 		elif(self.right > window_width - 1):
 			print "Right collision detected"
 			return True
+		else
+			return False
