@@ -76,14 +76,14 @@ class Game(pyglet.window.Window):
 		temp = self.ball.check_collision_sides(settings.WINDOW_WIDTH)
 		
 		if temp == 1:
-			self.score_left += 1
+			self.score_right += 1
 			self.score.text = str(self.score_left)
 			self.load_sprites()
 			self.pause()
 			self.draw()
 			print 'reset'
 		elif temp == 2:
-			self.score_right += 1
+			self.score_left += 1
 			self.score.text = str(self.score_right)
 			self.load_sprites()
 			self.pause()
