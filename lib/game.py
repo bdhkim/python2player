@@ -21,15 +21,16 @@ class Game(pyglet.window.Window):
 	racket_me = None
 	score_left = 0
 	score_right = 0
-	score = None
+	score_l = None
+	score_r = None
 	master_client = False
 	multiplayer_mode = False
 
 	def __init__(self, multiplayer_mode = False):
-		self.load_sprites()
 		self.multiplayer_mode = multiplayer_mode
 		if self.multiplayer_mode:
 			self.me, self.conn = connect()
+		self.load_sprites()
 
 	def draw(self):
 		if self.multiplayer_mode:
@@ -48,7 +49,10 @@ class Game(pyglet.window.Window):
 			self.running = False
 
 	def load_sprites(self):
-		self.score = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
+		if master_client:
+			self.score_l = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
+		else:
+			self.score_r = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
 		self.racket_left = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
 		self.racket_right = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
 		self.ball = Ball(pyglet.resource.image(settings.BALL_IMG)).center_anchor_y(settings.WINDOW_HEIGHT).center_anchor_x(settings.WINDOW_WIDTH)
@@ -67,12 +71,12 @@ class Game(pyglet.window.Window):
 			self.master_client = True
 			self.racket_me = self.racket_left
 			self.racket_vs = self.racket_right
-			self.score.text = str(self.score_left)
+			self.score_l.text = str(self.score_left)
 		else:
 			self.master_client = False
 			self.racket_me = self.racket_right
 			self.racket_vs = self.racket_left
-			self.score.text = str(self.score_right)
+			self.score_r.text = str(self.score_right)
 
 	def on_collision(self):
 		player = self.ball.check_collision([self.racket_left, self.racket_right])
@@ -86,10 +90,10 @@ class Game(pyglet.window.Window):
 			print self.master_client
 			if self.master_client:
 				self.score_left += 1
-				self.score.text = str(self.score_left)
+				self.score_l.text = str(self.score_left)
 			else:
 				self.score_right += 1
-				self.score.text = str(self.score_right)
+				self.score_r.text = str(self.score_right)
 			self.pause()
 			self.reset()
 			self.run()
