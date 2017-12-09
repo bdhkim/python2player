@@ -123,7 +123,7 @@ class Game(pyglet.window.Window):
 		self.define_players(data)
 
 		if self.master_client:
-			if((len(data.keys()) != 2) && (!self.firstRun))
+			if((len(data.keys()) != 2) and (!self.firstRun))
 				self.pause()
 				self.firstRun = True
 			else:
