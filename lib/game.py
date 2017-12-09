@@ -21,6 +21,8 @@ class Game(pyglet.window.Window):
 	racket_me = None
 	score_left = 0
 	score_right = 0
+	score_left_print = None
+	score_right_print = None
 	master_client = False
 	multiplayer_mode = False
 
@@ -47,10 +49,10 @@ class Game(pyglet.window.Window):
 			self.running = False
 
 	def load_sprites(self):
-		if self.master_client:
-			score_left_print = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
+		if master_client:
+			self.score_left_print = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
 		else:
-			score_right_print = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
+			self.score_right_print = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
 		self.racket_left = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
 		self.racket_right = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
 		self.ball = Ball(pyglet.resource.image(settings.BALL_IMG)).center_anchor_y(settings.WINDOW_HEIGHT).center_anchor_x(settings.WINDOW_WIDTH)
