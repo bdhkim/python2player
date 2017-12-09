@@ -125,6 +125,7 @@ class Game(pyglet.window.Window):
 					if not self.master_client:
 						self.ball.x = data[playerid]['ball']['x']
 						self.ball.y = data[playerid]['ball']['y']
+						self.score_right = data[playerid]['score']['right']
 			except:
 				pass
 
