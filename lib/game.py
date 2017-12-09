@@ -68,7 +68,6 @@ class Game(pyglet.window.Window):
 		player = self.ball.check_collision([self.racket_left, self.racket_right])
 		if player:
 			self.ball.hit_racket()
-			player.increase_score()
 			self.ball.prevent_stick(player)
 		if self.ball.check_collision_laterals(settings.WINDOW_HEIGHT):
 			self.ball.hit_lateral()
