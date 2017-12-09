@@ -119,6 +119,7 @@ class Game(pyglet.window.Window):
 		data = self.update_server_data()
 		self.define_players(data)
 
+		self.run()
 		if self.master_client:
 			self.on_collision()
 
