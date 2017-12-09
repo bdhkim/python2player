@@ -34,9 +34,6 @@ class Ball(sprobj.SprObj):
 	def check_collision_sides(self, window_width):
 		if(self.left < 1):
 			print "Left collision detected"
-			return 1
 		elif(self.right > window_width - 1):
 			print "Right collision detected"
-			return 2
-		else:
-			return 0
+		return True
