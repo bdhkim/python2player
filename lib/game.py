@@ -88,7 +88,7 @@ class Game(pyglet.window.Window):
 		if self.master_client and temp == 1:
 			self.score_right += 1
 			#self.score.text = str(self.score_left)
-		elif not self.master_client and temp == 2:
+		elif (not self.master_client) and temp == 2:
 			self.score_left += 1
 			#self.score.text = str(self.score_right)
 		if temp > 0:
