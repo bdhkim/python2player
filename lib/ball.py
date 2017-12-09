@@ -4,8 +4,8 @@ class Ball(sprobj.SprObj):
 
 	MOVING_RIGHT = True
 	MOVING_TOP = True
-	HORIZONTAL_MOVIMENT = 1.2
-	VERTICAL_MOVIMENT = 1
+	HORIZONTAL_MOVIMENT = 2.4
+	VERTICAL_MOVIMENT = 2
 
 	def hit_racket(self):
 		self.MOVING_RIGHT = not self.MOVING_RIGHT

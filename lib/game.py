@@ -25,7 +25,6 @@ class Game(pyglet.window.Window):
 	score_rp = None
 	master_client = False
 	multiplayer_mode = False
-	#update = False
 
 	def __init__(self, multiplayer_mode = False):
 		self.load_sprites()
@@ -57,6 +56,8 @@ class Game(pyglet.window.Window):
 		self.ball = Ball(pyglet.resource.image(settings.BALL_IMG)).center_anchor_y(settings.WINDOW_HEIGHT).center_anchor_x(settings.WINDOW_WIDTH)
 		self.racket_right.x = settings.WINDOW_WIDTH - self.racket_right.width
 		self.racket_me = self.racket_left
+		self.score_lp.text = str(self.score_left)
+		self.score_rp.text = str(self.score_right)
 		
 	def reset(self):
 		self.racket_left = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
@@ -70,12 +71,10 @@ class Game(pyglet.window.Window):
 			self.master_client = True
 			self.racket_me = self.racket_left
 			self.racket_vs = self.racket_right
-			self.score_lp.text = str(self.score_left)
 		else:
 			self.master_client = False
 			self.racket_me = self.racket_right
 			self.racket_vs = self.racket_left
-			self.score_rp.text = str(self.score_right)
 
 	def on_collision(self):
 		player = self.ball.check_collision([self.racket_left, self.racket_right])
@@ -86,14 +85,10 @@ class Game(pyglet.window.Window):
 			self.ball.hit_lateral()
 		
 		side = self.ball.check_collision_sides(settings.WINDOW_WIDTH)
-		if side > 0:
-			self.update = True
 
-		#if(self.update == True):
-			#update = False
-		if self.master_client and side == 1:
+		if side == 1:
 			self.score_left += 1
-		elif not self.master_client and side == 2:
+		elif side == 2:
 			self.score_right += 1
 		if side > 0:
 			self.pause()
