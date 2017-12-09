@@ -23,7 +23,6 @@ class Game(pyglet.window.Window):
 	score_right = 0
 	master_client = False
 	multiplayer_mode = False
-	firstRun = False
 
 	def __init__(self, multiplayer_mode = False):
 		self.load_sprites()
@@ -83,7 +82,6 @@ class Game(pyglet.window.Window):
 				self.score.text = str(self.score_right)
 			self.pause()
 			self.draw()
-			self.firstRun = False
 			print 'reset'
 
 	def update_server_data(self):
@@ -115,11 +113,10 @@ class Game(pyglet.window.Window):
 		data = self.update_server_data()
 		self.define_players(data)
 
-		if(len(data.keys()) != 2 and (not self.firstRun)):
-			self.pause()
-			self.firstRun = True
-		else:
+		if len(data.keys()) == 2:
 			self.run()
+        else:
+			self.pause()
 	
 		if self.master_client:
 			self.on_collision()
