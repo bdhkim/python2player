@@ -72,6 +72,8 @@ class Game(pyglet.window.Window):
             self.ball.prevent_stick(player)
         if self.ball.check_collision_laterals(settings.WINDOW_HEIGHT):
             self.ball.hit_lateral()
+		if self.ball.check_collision_sides(settings.WINDOW_WIDTH):
+			print "reset"
 
     def update_server_data(self):
         data = {
