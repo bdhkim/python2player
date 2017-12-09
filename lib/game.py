@@ -69,6 +69,7 @@ class Game(pyglet.window.Window):
 			self.racket_vs = self.racket_right
 			self.score.text = str(self.score_left)
 		else:
+			self.master_client = False
 			self.racket_me = self.racket_right
 			self.racket_vs = self.racket_left
 			self.score.text = str(self.score_right)
@@ -87,7 +88,6 @@ class Game(pyglet.window.Window):
 				self.score_left += 1
 				self.score.text = str(self.score_left)
 			else:
-				
 				self.score_right += 1
 				self.score.text = str(self.score_right)
 			self.pause()
