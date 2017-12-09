@@ -24,6 +24,7 @@ class Game(pyglet.window.Window):
 	score = None
 	master_client = False
 	multiplayer_mode = False
+	update = False
 
 	def __init__(self, multiplayer_mode = False):
 		self.load_sprites()
@@ -83,15 +84,20 @@ class Game(pyglet.window.Window):
 			self.ball.hit_lateral()
 		
 		side = self.ball.check_collision_sides(settings.WINDOW_WIDTH)
-		if self.master_client and side == 1:
-			self.score_left += 1
-		elif not self.master_client and side == 2:
-			self.score_right += 1
 		if side > 0:
-			self.pause()
-			self.reset()
-			self.run()
-			print 'reset'
+			update = True
+
+		if(update == True):
+			update = False
+			if self.master_client and side == 1:
+				self.score_left += 1
+			elif not self.master_client and side == 2:
+				self.score_right += 1
+			if side > 0:
+				self.pause()
+				self.reset()
+				self.run()
+				print 'reset'
 
 	def update_server_data(self):
 		data = {
@@ -103,6 +109,7 @@ class Game(pyglet.window.Window):
 				"x": self.racket_me.x,
 				"y": self.racket_me.y,
 			}
+			"update": self.update
 		}
 		self.conn.send(simplejson.dumps(data))
 		return simplejson.loads(self.conn.recv(2000))
