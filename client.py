@@ -12,5 +12,5 @@ import pyglet
 
 
 if __name__ == "__main__":
-    mainwindow.MainWindow(width=settings.WINDOW_WIDTH, height=settings.WINDOW_HEIGHT)
-    pyglet.app.run()
+	mainwindow.MainWindow(width=settings.WINDOW_WIDTH, height=settings.WINDOW_HEIGHT)
+	pyglet.app.run()
