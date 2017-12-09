@@ -6,8 +6,8 @@ class Ball(sprobj.SprObj):
     MOVING_TOP = True
     HORIZONTAL_MOVIMENT = 1
     VERTICAL_MOVIMENT = 0.8
-	SCORE_LEFT = 0
-	SCORE_RIGHT = 0
+    SCORE_LEFT = 0
+    SCORE_RIGHT = 0
 
     def hit_racket(self):
         self.MOVING_RIGHT = not self.MOVING_RIGHT
@@ -33,12 +33,12 @@ class Ball(sprobj.SprObj):
         else:
             return -self.VERTICAL_MOVIMENT
 			
-	def check_collision_sides(self, window_width):
-		if(self.left < 1):
+    def check_collision_sides(self, window_width):
+        if(self.left < 1):
             print "Left collision detected"
             SCORE_LEFT += 1
-			return True
+            return True
         elif(self.right > window_width - 1):
             print "Right collision detected"
-			SCORE_RIGHT += 1
+            SCORE_RIGHT += 1
             return True
