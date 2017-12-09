@@ -24,7 +24,6 @@ class Game(pyglet.window.Window):
 	score = None
 	master_client = False
 	multiplayer_mode = False
-	update = False
 
 	def __init__(self, multiplayer_mode = False):
 		self.load_sprites()
@@ -123,6 +122,7 @@ class Game(pyglet.window.Window):
 				if playerid != self.me:
 					self.racket_vs.y = data[playerid]['racket']['y']
 					self.score_right = data[playerid]['score']['right']
+					self.score_right = data[playerid]['score']['left']
 					if not self.master_client:
 						self.ball.x = data[playerid]['ball']['x']
 						self.ball.y = data[playerid]['ball']['y']
