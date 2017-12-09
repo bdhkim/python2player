@@ -118,13 +118,7 @@ class Game(pyglet.window.Window):
 	def draw_multiplayer(self):
 		data = self.update_server_data()
 		self.define_players(data)
-'''
-		if self.master_client:
-			if len(data.keys()) == 2:
-				self.run()
-			else:
-				self.pause()
-'''
+
 		if self.master_client:
 			self.on_collision()
 
