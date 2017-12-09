@@ -115,7 +115,7 @@ class Game(pyglet.window.Window):
 
 		if len(data.keys()) == 2:
 			self.run()
-        else:
+		else:
 			self.pause()
 	
 		if self.master_client:
