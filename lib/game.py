@@ -85,9 +85,9 @@ class Game(pyglet.window.Window):
 		
 		side = self.ball.check_collision_sides(settings.WINDOW_WIDTH)
 		if side > 0:
-			update = True
+			self.update = True
 
-		if(update == True):
+		if(self.update == True):
 			update = False
 			if self.master_client and side == 1:
 				self.score_left += 1
