@@ -53,10 +53,10 @@ class SprObj(pyglet.sprite.Sprite):
             print "Lateral collision detected"
             return True
 			
-	def check_collision_sides(self, window_width):
-		if(self.left < window_width):
-			print "Left collision detected"
-			return True
-		elif(self.right > window_width):
-			print "Right collision detected"
-			return True
+    def check_collision_sides(self, window_width):
+	    if(self.left < window_width):
+            print "Left collision detected"
+            return True
+        elif(self.right > window_width):
+            print "Right collision detected"
+            return True
