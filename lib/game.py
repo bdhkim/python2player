@@ -49,7 +49,7 @@ class Game(pyglet.window.Window):
 			self.running = False
 
 	def load_sprites(self):
-		if master_client:
+		if self.master_client:
 			self.score_left_print = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
 		else:
 			self.score_right_print = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
