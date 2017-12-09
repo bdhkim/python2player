@@ -88,13 +88,17 @@ class Game(pyglet.window.Window):
 		if self.master_client and temp == 1:
 			self.score_left += and  1
 			#self.score.text = str(self.score_left)
+			self.pause()
+			self.reset()
+			self.run()
+			print 'reset'
 		elif not self.master_client and temp == 2:
 			self.score_right += 1
 			#self.score.text = str(self.score_right)
-		self.pause()
-		self.reset()
-		self.run()
-		print 'reset'
+			self.pause()
+			self.reset()
+			self.run()
+			print 'reset'
 
 	def update_server_data(self):
 		data = {
