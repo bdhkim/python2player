@@ -110,8 +110,8 @@ class Game(pyglet.window.Window):
 				"y": self.racket_me.y,
 			},
 			"score": {
-				"left": self.score_left
-				"right": self.score_right
+				"left": self.score_left,
+				"right": self.score_right,
 			}
 		}
 		self.conn.send(simplejson.dumps(data))
