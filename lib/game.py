@@ -24,6 +24,7 @@ class Game(pyglet.window.Window):
 	score = None
 	master_client = False
 	multiplayer_mode = False
+	need_reset = False
 
 	def __init__(self, multiplayer_mode = False):
 		self.load_sprites()
@@ -87,13 +88,16 @@ class Game(pyglet.window.Window):
 		print self.master_client
 		if self.master_client and temp == 1:
 			self.score_left += 1
+			self.need_reset = True
 			#self.score.text = str(self.score_left)
 		elif not self.master_client and temp == 2:
 			self.score_right += 1
+			self.need_reset = True
 			#self.score.text = str(self.score_right)
 		if temp > 0:
 			self.pause()
 			self.reset()
+			self.need_reset = False
 			self.run()
 			print 'reset'
 
