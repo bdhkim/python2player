@@ -62,11 +62,11 @@ class Game(pyglet.window.Window):
 			self.master_client = True
 			self.racket_me = self.racket_left
 			self.racket_vs = self.racket_right
-			score_left_print.text = str(self.score_left)
+			self.score_left_print.text = str(self.score_left)
 		else:
 			self.racket_me = self.racket_right
 			self.racket_vs = self.racket_left
-			score_right_print.text = str(self.score_right)
+			self.score_right_print.text = str(self.score_right)
 
 	def on_collision(self):
 		player = self.ball.check_collision([self.racket_left, self.racket_right])
@@ -79,10 +79,10 @@ class Game(pyglet.window.Window):
 		if self.ball.check_collision_sides(settings.WINDOW_WIDTH):
 			if self.master_client:
 				self.score_left += 1
-				score_left_print.text = str(self.score_left)
+				self.score_left_print.text = str(self.score_left)
 			else:
 				self.score_right += 1
-				score_right_print.text = str(self.score_right)
+				self.score_right_print.text = str(self.score_right)
 			self.pause()
 			self.load_sprites()
 			self.run()
