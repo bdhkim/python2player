@@ -24,6 +24,7 @@ class Game(pyglet.window.Window):
 	score = None
 	master_client = False
 	multiplayer_mode = False
+	update = False
 
 	def __init__(self, multiplayer_mode = False):
 		self.load_sprites()
