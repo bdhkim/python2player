@@ -4,6 +4,6 @@ SERVER_PORT = 50090
 WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 400
 
-MOVE_SPEED = 8
+MOVE_SPEED = 12
 BALL_IMG = 'assets/ball.png'
 RACKET_IMG = 'assets/racket.png'
