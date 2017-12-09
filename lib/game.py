@@ -129,8 +129,8 @@ class Game(pyglet.window.Window):
 		else:
 			self.pause()
 	
-		if self.master_client:
-			self.on_collision()
+		#if self.master_client:
+		self.on_collision()
 
 		self.update_multiplayer_positions(data)
 
