@@ -19,8 +19,6 @@ class Game(pyglet.window.Window):
 	racket_left = None
 	racket_right = None
 	racket_me = None
-	score_left_print = None
-	score_right_print = None
 	score_left = 0
 	score_right = 0
 	master_client = False
