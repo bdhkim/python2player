@@ -36,9 +36,9 @@ class Ball(sprobj.SprObj):
 	def check_collision_sides(self, window_width):
 		if(self.left < 1):
 			print "Left collision detected"
-			SCORE_LEFT += 1
+			self.SCORE_LEFT += 1
 			return True
 		elif(self.right > window_width - 1):
 			print "Right collision detected"
-			SCORE_RIGHT += 1
+			self.SCORE_RIGHT += 1
 			return True
