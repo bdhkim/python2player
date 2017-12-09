@@ -87,7 +87,7 @@ class Game(pyglet.window.Window):
 			self.score_left += 1
 		elif not self.master_client and side == 2:
 			self.score_right += 1
-		if temp > 0:
+		if side > 0:
 			self.pause()
 			self.reset()
 			self.run()
