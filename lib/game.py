@@ -72,19 +72,22 @@ class Game(pyglet.window.Window):
 			self.ball.prevent_stick(player)
 		if self.ball.check_collision_laterals(settings.WINDOW_HEIGHT):
 			self.ball.hit_lateral()
-		if self.ball.check_collision_sides(settings.WINDOW_WIDTH) == 1:
+		
+		temp = self.ball.check_collision_sides(settings.WINDOW_WIDTH)
+		
+		if temp == 1:
 			self.score_left += 1
+			self.score.text = str(self.score_left)
 			self.load_sprites()
-			self.draw()
 			self.pause()
-			self.run()
+			self.draw()
 			print 'reset'
-		elif self.ball.check_collision_sides(settings.WINDOW_WIDTH) == 2:
+		elif temp == 2:
 			self.score_right += 1
+			self.score.text = str(self.score_right)
 			self.load_sprites()
-			self.draw()
 			self.pause()
-			self.run()
+			self.draw()
 			print 'reset'
 
 	def update_server_data(self):
@@ -115,13 +118,13 @@ class Game(pyglet.window.Window):
 	def draw_multiplayer(self):
 		data = self.update_server_data()
 		self.define_players(data)
-
+'''
 		if self.master_client:
 			if len(data.keys()) == 2:
 				self.run()
 			else:
 				self.pause()
-
+'''
 		if self.master_client:
 			self.on_collision()
 
