@@ -59,11 +59,11 @@ class Game(pyglet.window.Window):
 			self.master_client = True
 			self.racket_me = self.racket_left
 			self.racket_vs = self.racket_right
-			self.score.text = str(score_left)
+			self.score.text = str(self.score_left)
 		else:
 			self.racket_me = self.racket_right
 			self.racket_vs = self.racket_left
-			self.score.text = str(score_right)
+			self.score.text = str(self.score_right)
 
 	def on_collision(self):
 		player = self.ball.check_collision([self.racket_left, self.racket_right])
