@@ -56,9 +56,7 @@ class Game(pyglet.window.Window):
 		self.ball = Ball(pyglet.resource.image(settings.BALL_IMG)).center_anchor_y(settings.WINDOW_HEIGHT).center_anchor_x(settings.WINDOW_WIDTH)
 		self.racket_right.x = settings.WINDOW_WIDTH - self.racket_right.width
 		self.racket_me = self.racket_left
-		self.score_lp.text = str(self.score_left)
-		self.score_rp.text = str(self.score_right)
-		
+
 	def reset(self):
 		self.racket_left = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
 		self.racket_right = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
@@ -75,6 +73,8 @@ class Game(pyglet.window.Window):
 			self.master_client = False
 			self.racket_me = self.racket_right
 			self.racket_vs = self.racket_left
+		self.score_lp.text = str(self.score_left)
+		self.score_rp.text = str(self.score_right)
 
 	def on_collision(self):
 		player = self.ball.check_collision([self.racket_left, self.racket_right])
