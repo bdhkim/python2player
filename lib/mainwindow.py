@@ -26,6 +26,7 @@ class MainWindow(pyglet.window.Window):
         self.game.draw()
 
         self.game.ball.draw()
-        self.game.score.draw()
+        self.game.score_lp.draw()
+        self.game.score_rp.draw()
         self.game.racket_left.draw()
         self.game.racket_right.draw()
