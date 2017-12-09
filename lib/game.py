@@ -1,18 +1,28 @@
-import simplejson, socket, pyglet
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import simplejson
+import socket
+import pyglet
 import settings
 from racket import Racket
 from ball import Ball
+
 
 def connect():
     try:
         conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         conn.connect((settings.SERVER_IP, settings.SERVER_PORT))
         me = str(conn.getsockname()[1])
-        print "Client connected to %s:%s with id: %s" % (settings.SERVER_IP, settings.SERVER_PORT, me)
+        print
+        'Client connected to %s:%s with id: %s' \
+        % (settings.SERVER_IP, settings.SERVER_PORT, me)
         return [me, conn]
     except socket.error:
-        print "Couldn't connect to game server in: %s:%s" % (settings.SERVER_IP, settings.SERVER_PORT)
+        print
+        "Couldn't connect to game server in: %s:%s" \
+        % (settings.SERVER_IP, settings.SERVER_PORT)
         sys.exit(1)
+
 
 class Game(pyglet.window.Window):
     running = False
@@ -23,11 +33,11 @@ class Game(pyglet.window.Window):
     master_client = False
     multiplayer_mode = False
 
-    def __init__(self, multiplayer_mode = False):
+    def __init__(self, multiplayer_mode=False):
         self.load_sprites()
         self.multiplayer_mode = multiplayer_mode
         if self.multiplayer_mode:
-            self.me, self.conn = connect()
+            (self.me, self.conn) = connect()
 
     def draw(self):
         if self.multiplayer_mode:
@@ -46,15 +56,27 @@ class Game(pyglet.window.Window):
             self.running = False
 
     def load_sprites(self):
-        self.score = pyglet.text.Label('', font_size=15, x=settings.WINDOW_WIDTH/2, y=settings.WINDOW_HEIGHT - 15, anchor_x='center', anchor_y='center')
-        self.racket_left = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
-        self.racket_right = Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
-        self.ball = Ball(pyglet.resource.image(settings.BALL_IMG)).center_anchor_y(settings.WINDOW_HEIGHT).center_anchor_x(settings.WINDOW_WIDTH)
-        self.racket_right.x = settings.WINDOW_WIDTH - self.racket_right.width
+        self.score = pyglet.text.Label(
+            '',
+            font_size=15,
+            x=settings.WINDOW_WIDTH / 2,
+            y=settings.WINDOW_HEIGHT - 15,
+            anchor_x='center',
+            anchor_y='center',
+        )
+        self.racket_left = \
+            Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
+        self.racket_right = \
+            Racket(pyglet.resource.image(settings.RACKET_IMG)).center_anchor_y(settings.WINDOW_HEIGHT)
+        self.ball = \
+            Ball(pyglet.resource.image(settings.BALL_IMG)).center_anchor_y(settings.WINDOW_HEIGHT).center_anchor_x(
+                settings.WINDOW_WIDTH)
+        self.racket_right.x = settings.WINDOW_WIDTH \
+                              - self.racket_right.width
         self.racket_me = self.racket_left
 
     def define_players(self, server_response):
-        if self.me == sorted(server_response.keys())[0]: #the first client connection
+        if self.me == sorted(server_response.keys())[0]:  # the first client connection
             self.master_client = True
             self.racket_me = self.racket_left
             self.racket_vs = self.racket_right
@@ -65,7 +87,8 @@ class Game(pyglet.window.Window):
             self.score.text = self.ball.SCORE_RIGHT
 
     def on_collision(self):
-        player = self.ball.check_collision([self.racket_left, self.racket_right])
+        player = self.ball.check_collision([self.racket_left,
+                                            self.racket_right])
         if player:
             self.ball.hit_racket()
             self.ball.prevent_stick(player)
@@ -75,19 +98,14 @@ class Game(pyglet.window.Window):
 
         if self.ball.check_collision_sides(settings.WINDOW_WIDTH):
             self.load_sprites()
-            print "reset"
+            print
+            'reset'
 
     def update_server_data(self):
-        data = {
-            "ball": {
-                "x": self.ball.x,
-                "y": self.ball.y,
-            },
-            "racket": {
-                "x": self.racket_me.x,
-                "y": self.racket_me.y,
-            }
-        }
+        data = {'ball': {'x': self.ball.x, 'y': self.ball.y},
+                'racket': {'x': self.racket_me.x,
+                           'y': self.racket_me.y}}
+
         self.conn.send(simplejson.dumps(data))
         return simplejson.loads(self.conn.recv(2000))
 
@@ -120,3 +138,6 @@ class Game(pyglet.window.Window):
     def draw_singleplayer(self):
         self.run()
         self.on_collision()
+
+
+
