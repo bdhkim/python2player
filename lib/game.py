@@ -108,7 +108,7 @@ class Game(pyglet.window.Window):
 			"racket": {
 				"x": self.racket_me.x,
 				"y": self.racket_me.y,
-			}
+			},
 			"update": self.update
 		}
 		self.conn.send(simplejson.dumps(data))
@@ -129,7 +129,7 @@ class Game(pyglet.window.Window):
 		data = self.update_server_data()
 		self.define_players(data)
 
-		if len(data.keys()) == 2:
+		if len(data.keys()) > 0:
 			self.run()
 		else:
 			self.pause()
