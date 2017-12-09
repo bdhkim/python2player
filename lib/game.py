@@ -74,20 +74,13 @@ class Game(pyglet.window.Window):
 		if self.ball.check_collision_laterals(settings.WINDOW_HEIGHT):
 			self.ball.hit_lateral()
 		
-		temp = self.ball.check_collision_sides(settings.WINDOW_WIDTH)
-		
-		if temp == 1:
-			self.score_right += 1
-			self.score.text = str(self.score_left)
-			self.load_sprites()
-			self.pause()
-			self.draw()
-			self.firstRun = False
-			print 'reset'
-		elif temp == 2:
-			self.score_left += 1
-			self.score.text = str(self.score_right)
-			self.load_sprites()
+		if self.ball.check_collision_sides(settings.WINDOW_WIDHT):
+			if self.master_client:
+				self.score_left += 1
+				self.score.text = str(self.score_left)
+			else:
+				self.score_right += 1
+				self.score.text = str(self.score_right)
 			self.pause()
 			self.draw()
 			self.firstRun = False
@@ -122,13 +115,12 @@ class Game(pyglet.window.Window):
 		data = self.update_server_data()
 		self.define_players(data)
 
-		if self.master_client:
-			if(len(data.keys()) != 2 and (not self.firstRun)):
-				self.pause()
-				self.firstRun = True
-			else:
-				self.run()
-		
+		if(len(data.keys()) != 2 and (not self.firstRun)):
+			self.pause()
+			self.firstRun = True
+		else:
+			self.run()
+	
 		if self.master_client:
 			self.on_collision()
 
