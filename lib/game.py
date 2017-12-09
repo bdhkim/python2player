@@ -86,7 +86,7 @@ class Game(pyglet.window.Window):
 		#if self.ball.check_collision_sides(settings.WINDOW_WIDTH):
 		print self.master_client
 		if self.master_client and temp == 1:
-			self.score_left += and  1
+			self.score_left += 1
 			#self.score.text = str(self.score_left)
 			self.pause()
 			self.reset()
