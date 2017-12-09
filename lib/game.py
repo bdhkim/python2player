@@ -81,7 +81,8 @@ class Game(pyglet.window.Window):
 				self.score_right += 1
 				self.score.text = str(self.score_right)
 			self.pause()
-			self.draw()
+			self.load_sprites()
+			self.run()
 			print 'reset'
 
 	def update_server_data(self):
