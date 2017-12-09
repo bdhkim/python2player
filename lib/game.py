@@ -109,7 +109,10 @@ class Game(pyglet.window.Window):
 				"x": self.racket_me.x,
 				"y": self.racket_me.y,
 			},
-			"update": self.update
+			"score": {
+				"left": self.score_left
+				"right": self.score_right
+			}
 		}
 		self.conn.send(simplejson.dumps(data))
 		return simplejson.loads(self.conn.recv(2000))
@@ -129,13 +132,13 @@ class Game(pyglet.window.Window):
 		data = self.update_server_data()
 		self.define_players(data)
 
-		if len(data.keys()) > 0:
+		if len(data.keys()) > 2:
 			self.run()
 		else:
 			self.pause()
 	
-		#if self.master_client:
-		self.on_collision()
+		if self.master_client:
+			self.on_collision()
 
 		self.update_multiplayer_positions(data)
 
